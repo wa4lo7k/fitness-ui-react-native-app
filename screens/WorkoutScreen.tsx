@@ -80,7 +80,7 @@ const WorkoutScreen = () => {
             </View>
 
             {completed.includes(item.name) && (
-              <AntDesign name={"checkcircle" as any} size={24} color="#198f51" />
+              <AntDesign name="checkcircleo" size={24} color="#198f51" />
             )}
           </TouchableOpacity>
         ))}
