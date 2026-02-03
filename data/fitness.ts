@@ -1,4 +1,6 @@
-export default [
+import { FitnessData } from '../types';
+
+const fitness: FitnessData[] = [
   {
     id: "0",
     image:
@@ -176,3 +178,5 @@ export default [
     ]
   }
 ];
+
+export default fitness;

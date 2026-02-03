@@ -6,50 +6,76 @@ import { FitnessItems } from '../Context';
 
 const HomeScreen = () => {
   const [showIcon, setShowIcon] = useState(false);
-  const { calories, minutes, workout, } = useContext(FitnessItems);
+  const context = useContext(FitnessItems);
+
+  if (!context) {
+    throw new Error('HomeScreen must be used within FitnessContext');
+  }
+
+  const { calories, minutes, workout } = context;
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}
-      style={{ marginTop: 20 }}>
-      <View style={{ backgroundColor: "#000000d7", paddingTop: 40, paddingHorizontal: 20, height: 160, width: "100%" }}>
-        <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 50}}>
-          <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>SIX PACK IN 30 DAYS</Text>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{ marginTop: 20 }}
+    >
+      <View style={{
+        backgroundColor: "#000000d7",
+        paddingTop: 40,
+        paddingHorizontal: 20,
+        height: 160,
+        width: "100%"
+      }}>
+        <View style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 50
+        }}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
+            SIX PACK IN 30 DAYS
+          </Text>
 
-          {/* Dark Mode  */}
           <TouchableOpacity onPress={() => setShowIcon(!showIcon)}>
-            {showIcon ? <Ionicons name="sunny" size={24} color="white" /> : <Ionicons name="moon" size={24} color="white" /> }
-          </TouchableOpacity>  
+            {showIcon ? (
+              <Ionicons name="sunny" size={24} color="white" />
+            ) : (
+              <Ionicons name="moon" size={24} color="white" />
+            )}
+          </TouchableOpacity>
         </View>
 
-        {/* Cards Row  */}
-        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 30 }}>
-
-          {/* First Card  */}
+        <View style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 30
+        }}>
           <View style={styles.shadowCards}>
-            <Text style={{ fontWeight: "bold", fontSize: 18 }}>{calories.toFixed(2)}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+              {calories.toFixed(2)}
+            </Text>
             <Text>KCAL</Text>
           </View>
 
-          {/* Second Card  */}
           <View style={styles.shadowCards}>
             <Text style={{ fontWeight: "bold", fontSize: 18 }}>{workout}</Text>
             <Text>WORKOUTS</Text>
           </View>
 
-          {/* Third Card  */}
           <View style={styles.shadowCards}>
             <Text style={{ fontWeight: "bold", fontSize: 18 }}>{minutes}</Text>
             <Text>MINUTES</Text>
           </View>
         </View>
       </View>
-      {/* Fitness Cards  */}
+
       <FitnessCards />
     </ScrollView>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   shadowCards: {
